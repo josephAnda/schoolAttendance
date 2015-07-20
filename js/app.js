@@ -29,6 +29,9 @@
 
 /* STUDENT APPLICATION */
 $(function() {
+
+    "use strict";
+    
     var attendance = JSON.parse(localStorage.attendance),
         $allMissed = $('tbody .missed-col'),
         $allCheckboxes = $('tbody input');
