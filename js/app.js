@@ -31,7 +31,13 @@
 $(function() {
 
     "use strict";
-    
+
+    var model = {
+
+    };
+    var view = {};
+    var controller = {};
+
     var attendance = JSON.parse(localStorage.attendance),
         $allMissed = $('tbody .missed-col'),
         $allCheckboxes = $('tbody input');
