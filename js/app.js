@@ -47,6 +47,7 @@ $(function() {
 
     var controller = {
         init: function() {
+            this.checkBoxes;
 
         },
         countMissing: function(column) {
@@ -62,7 +63,15 @@ $(function() {
                 });
             $(this).text(numMissed);
             });
-        }
+        },
+        checkBoxes: $.each(model.attendance, function(name, days) {
+            var studentRow = $('tbody .name-col:contains("' + name + '")').parent('tr'),
+                dayChecks = $(studentRow).children('.attend-col').children('input');
+
+            dayChecks.each(function(i) {
+                $(this).prop('checked', days[i]);
+            });
+        })
     };
 
 
@@ -71,14 +80,7 @@ $(function() {
     
 
     // Check boxes, based on attendace records
-    $.each(model.attendance, function(name, days) {
-        var studentRow = $('tbody .name-col:contains("' + name + '")').parent('tr'),
-            dayChecks = $(studentRow).children('.attend-col').children('input');
-
-        dayChecks.each(function(i) {
-            $(this).prop('checked', days[i]);
-        });
-    });
+    
 
     // When a checkbox is clicked, update localStorage
     model.$allCheckboxes.on('click', function() {
@@ -99,6 +101,6 @@ $(function() {
         controller.countMissing(model.$allMissed);
         localStorage.attendance = JSON.stringify(newAttendance);
     });
-
+    controller.init();
     controller.countMissing(model.$allMissed);
 }());
